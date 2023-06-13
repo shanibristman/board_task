@@ -10,13 +10,37 @@ export default function TaskContextProvider(props) {
         let res = await fetch(`http://localhost:5008/api/tasks`,
         { method: 'GET' });
         let data = await res.json();
-        console.log(data);
         SetTasks(data);
     }
 
+    const AddTask = async (task) => {        
+        let res = await fetch(`http://localhost:5008/api/tasks/add`,
+            {
+                method: 'POST',
+                body: (JSON.stringify(task)),
+                headers: { 'Content-Type': 'application/json'}
+
+            });
+        let data = await res.json();
+    }
+
+    const UpdateTask = async(task) => {
+      
+        let id=task.id;        
+        let res = await fetch(`http://localhost:5008/api/tasks/${id}`,
+        {
+            method: 'PUT',
+            body: (JSON.stringify(task)),
+            headers: { 'Content-Type': 'application/json'}
+        });
+        let data = await res.json();    
+      }
+
     const values = {
         Tasks,
-        loadActivityTask
+        loadActivityTask,
+        AddTask,
+        UpdateTask
     }
     return(
         <TaskContext.Provider value={values}>

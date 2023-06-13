@@ -1,0 +1,50 @@
+.all{
+    position: relative;
+}
+
+
+.task-title{
+    width: 200px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.task-title button{
+    background-color:transparent
+}
+
+.popup{
+    display: flex;
+    width: 250px;
+    height: 100px;
+    z-index: 1;
+    position: absolute;
+    flex-direction: column;
+    align-items: center;
+    background-color: #e7dada;
+    border-radius: 15px;
+    font-weight: bold;
+    justify-content: space-evenly;
+}
+
+.scrool{
+    overflow-y: scroll;    
+}
+
+.popup button{
+    background-color:transparent;
+    border: 0;
+    display: flex;
+    align-items:flex-end
+}
+
+.one-description{
+    width: 100%;
+    display: flex;
+}
+
+.edit-btn{
+    border: 0;
+    border-bottom: 1px solid #916d6d;
+}

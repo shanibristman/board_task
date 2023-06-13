@@ -7,8 +7,6 @@ const path = require('path');
 const PORT = process.env.PORT || 5008;
 const server = express();
 
-
-
 server.use(cors()); 
 server.use(express.json()); 
 

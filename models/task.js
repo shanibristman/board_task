@@ -6,12 +6,13 @@ class Task {
     createdAt;
     isActive;
 
-    constructor(title = "", description = "") {
+    constructor(title="", description="") {
         this.title = title;
         this.description = description;
         this.createdAt = Date.now();
         this.isActive = true;
     }
+
 
     async GetAllActiveTasks() {
         try {
@@ -25,15 +26,6 @@ class Task {
         try {
             return await new DB().FindAll('tasks');
         } catch (error) {
-            return error;
-        }
-    }
-
-    async GetTaskByID(id) {
-        try {
-            return await new DB().FindByID('tasks', id);
-        } catch (error) {
-            console.log(error);
             return error;
         }
     }
@@ -53,14 +45,6 @@ class Task {
             console.log(error);
             return error;
         } 
-    }
-
-    async DeleteTask(id) {
-        try {
-            return await new DB().DeactivateDocById('tasks',id);
-        } catch (error) {
-            return error;
-        }
     }
 }
 

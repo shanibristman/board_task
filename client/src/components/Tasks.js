@@ -6,17 +6,55 @@ import './Tasks.css';
 
 export default function Tasks() {
 
-    const {Tasks, loadActivityTask} = useContext(TaskContext);
+    const {Tasks, loadActivityTask, AddTask} = useContext(TaskContext);
+    const [Open , SetOpen] = useState(false);
+
+    const [Title, SetTitle] = useState();
+    const [stringDescription, SetStringDescription] = useState([]);
+
+
+    const openAdd=(event)=>{
+        event.preventDefault();
+        SetOpen(!Open)
+    }
+
+    const  AddThisTask= async ()=>{
+  
+        let arr = stringDescription.split(',');
+        let task = {
+            title : Title,
+            description : arr
+        }
+        await AddTask(task);
+        SetOpen(!Open)
+        loadActivityTask();
+    }
 
     useEffect(() =>{
         loadActivityTask();
     },[])
 
-
   return (
+    
     <div className="allpage">
         <div className='title'>TASK BOARD:</div>
-        <button className='btn-add'>Add Task</button>
+        {Open?
+        <div className='popups'>
+            <button onClick={openAdd} >X</button>
+            <div>Add Task</div>
+            <label>
+                <div>Title:</div>
+                <input placeholder='Title: ' onChange={e=>SetTitle(e.target.value)}></input>
+            </label>
+            <label>
+                <div>Description:</div>
+                <input placeholder='Put the sign "," between the different descriptions' onChange={e=>SetStringDescription(e.target.value)}></input>
+            </label>
+            <button onClick={AddThisTask}>Add Task</button>
+        </div>
+        :
+        <button className='btn-add' onClick={openAdd}>Add Task</button>
+}
         <div className='cards'>
             {Tasks.map((task, index)=>{
                 return (
