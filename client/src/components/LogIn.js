@@ -1,18 +1,30 @@
 import React, { useState, useContext } from 'react'
 import { UserContext } from '../context/UserContext';
+import { useHistory } from 'react-router-dom';
+
 
 export default function LogIn() {
+
+    const history = useHistory()
 
     const [Email, SetEmail] = useState();
     const [Password, SetPassword] = useState();
     const {logIn} = useContext(UserContext)
 
-    const logInThisUser = async()=>{
+    const logInThisUser = async(e)=>{
+        e.preventDefault();
         let user = {
             email : Email,
             password : Password
         }
-        await logIn(user)
+        let flag = await logIn(user)
+
+        if(flag) {
+            history.push('/board');
+        }
+        else{
+            alert("email or password invalid.. :(")
+        }
 
     }
     return (

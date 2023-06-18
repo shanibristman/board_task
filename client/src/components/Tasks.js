@@ -4,16 +4,23 @@ import { TaskContext } from '../context/TaskContext';
 import TaskCard from './TaskCard'
 import LogIn from './LogIn';
 import './Tasks.css';
+import { UserContext } from '../context/UserContext';
+import { useHistory } from 'react-router-dom';
+
 
 
 export default function Tasks() {
 
     const {Tasks, loadActivityTask, AddTask} = useContext(TaskContext);
+    const {isAuthenticated, logOut} = useContext(UserContext)
     const [Open , SetOpen] = useState(false);
     const [OpenLog, SetOpenLog] = useState(false);
 
     const [Title, SetTitle] = useState();
     const [stringDescription, SetStringDescription] = useState([]);
+
+    const history = useHistory()
+
 
 
     const openAdd=(event)=>{
@@ -21,10 +28,10 @@ export default function Tasks() {
         SetOpen(!Open)
     }
 
-    const openLog = (e)=>{
-        e.preventDefault();
-        SetOpenLog(!OpenLog)
-    }
+    // const openLog = (e)=>{
+    //     e.preventDefault();
+    //     SetOpenLog(!OpenLog)
+    // }
 
     const  AddThisTask= async ()=>{
   
@@ -40,15 +47,16 @@ export default function Tasks() {
 
     useEffect(() =>{
         loadActivityTask();
+        if(!isAuthenticated()){
+            logOut()
+            history.push('/');
+        }
     },[])
 
   return (
     
     <div className="allpage">
-        {OpenLog ? 
-        <LogIn/> : 
-        <div>
-            <button onClick={openLog}>LogIn</button>
+            {/* <button onClick={openLog}>LogIn</button> */}
             <div className='title'>TASK BOARD:</div>
             {Open?
             <div className='popups'>
@@ -77,7 +85,7 @@ export default function Tasks() {
                 })}
             </div>
         </div>
-        }
-        </div>
+        // }
+        // </div>
   )
 }

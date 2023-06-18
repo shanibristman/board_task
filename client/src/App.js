@@ -1,14 +1,17 @@
-import { BrowserRouter as Router} from 'react-router-dom';
-import Tasks from './components/Tasks';
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import TaskContextProvide from "./context/TaskContext";
 import UserContextProvider from "./context/UserContext";
+
+import Navigation from './components/Navigation';
 
 function App() {
   return (
     <TaskContextProvide>
       <UserContextProvider>
         <Router>
-          <Tasks/>
+          <Switch>
+              <Navigation/>
+          </Switch>
         </Router>
       </UserContextProvider>
     </TaskContextProvide>
