@@ -14,6 +14,8 @@ server.use(express.static(path.join(__dirname, 'client/build/')));
 
 
 server.use('/api/tasks', require('./controllers/TaskController'));
+server.use('/api/users', require('./controllers/UserController'));
+
 
 
 

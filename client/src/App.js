@@ -1,13 +1,16 @@
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import Tasks from "./components/Tasks";
+import { BrowserRouter as Router} from 'react-router-dom';
+import Tasks from './components/Tasks';
 import TaskContextProvide from "./context/TaskContext";
+import UserContextProvider from "./context/UserContext";
 
 function App() {
   return (
     <TaskContextProvide>
-      <Router>
-        <Tasks></Tasks>
-      </Router>
+      <UserContextProvider>
+        <Router>
+          <Tasks/>
+        </Router>
+      </UserContextProvider>
     </TaskContextProvide>
   );
 }
